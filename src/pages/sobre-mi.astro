@@ -1,14 +1,36 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import foto from '../assets/roberto.jpg';
 import { SITIO } from '../config';
 ---
 
 <Base titulo="Sobre mí" descripcion={`Quién escribe ${SITIO.titulo}`}>
   <div class="contenedor">
     <h1 class="titular ancho">Sobre mí</h1>
+    <div class="sobre">
     <div class="prosa prosa--inicio">
-      <p>Soy {SITIO.autor}. Aquí junto los rincones a los que volvería.</p>
-      <p>Cada viaje tiene varios rincones, y cada rincón tiene sus fotos y lo que vale la pena contar.</p>
+      <p>
+        Soy Roberto, chileno. De día trabajo en transformación digital e inteligencia artificial; el resto del
+        tiempo, si puedo, estoy planeando el próximo viaje.
+      </p>
+      <p>
+        Viajar es algo que trato de hacer desde hace años: descubrir lugares nuevos, a veces muy distintos entre
+        sí. Aquí junto mis rincones favoritos. Algunos son muy conocidos y otros no tanto, y hay de todo:
+        naturaleza, cultura, historia. Lo que tienen en común es que me dejaron con ganas de volver. Cada uno
+        tiene sus fotos, un mapa y lo que recuerdo de haber estado ahí.
+      </p>
+      <p>
+        Este blog era un proyecto que tenía pendiente hace años. Siempre faltaba el tiempo, o las ganas de
+        pelearme con la parte técnica. Al final lo armé conversando con una inteligencia artificial, sin escribir
+        una línea de código: yo puse las fotos, los recuerdos y las decisiones, y la IA hizo el resto.
+        Obviamente me ayudó, y lo cuento porque sin esa ayuda este sitio seguiría siendo una idea.
+      </p>
+    </div>
+    <figure class="retrato">
+      <Image src={foto} alt="Roberto sentado en el pasto, con Stonehenge de fondo" widths={[400, 700, 1000]} sizes="(max-width: 56rem) 100vw, 26rem" />
+      <figcaption>En Stonehenge, Inglaterra.</figcaption>
+    </figure>
     </div>
   </div>
 </Base>
@@ -18,5 +40,35 @@ import { SITIO } from '../config';
     margin: 3.5rem 0 3rem;
     font-size: clamp(2.75rem, 7vw, 6.5rem);
     line-height: 0.92;
+  }
+  .sobre {
+    display: grid;
+    grid-template-columns: minmax(0, var(--ancho-texto)) minmax(0, 26rem);
+    gap: 4rem;
+    align-items: start;
+  }
+  .retrato {
+    margin: 0.5rem 0 0;
+  }
+  .retrato img {
+    width: 100%;
+    background: var(--fondo-2);
+  }
+  .retrato figcaption {
+    margin-top: 0.625rem;
+    font-family: var(--lectura);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--texto-suave);
+  }
+  @media (max-width: 56rem) {
+    .sobre {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .retrato {
+      order: -1;
+      max-width: 24rem;
+    }
   }
 </style>
