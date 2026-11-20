@@ -18,6 +18,11 @@ Diseño "Galería": fondo oscuro, fotos grandes, títulos en Archivo ancho.
   En "Por viaje", cada viaje muestra las portadas de sus 4 rincones más recientes (el más nuevo
   primero). Si tiene menos de 4, quedan huecos: Roberto no quiere rellenarlos con otras fotos.
 - Dentro de un viaje, el orden de los rincones sale de la `fecha` de cada uno.
+- En cada rincón, la portada va arriba (dentro de los márgenes, no de borde a borde) y las `fotos`
+  se reparten solas a lo largo del texto (`src/lib/relato.ts`): dos verticales seguidas van de a
+  par, una vertical sola va al lado del texto, y las horizontales rotan entre ancha (más que el
+  texto, sin llegar a los bordes), al lado del texto y del ancho de la columna. El orden de la
+  lista `fotos` es el orden en que aparecen.
 - Nombre, bajada y autor del blog: `src/config.ts`.
 - Dominio y ruta base: `astro.config.mjs` (`SITE` y `BASE`).
 
@@ -52,7 +57,7 @@ pais: Islandia                    # opcional, solo si es distinto al del viaje
 resumen: Una o dos frases para buscadores y redes.
 portada: ./portada.jpg
 portadaAlt: Descripción breve de la foto principal
-fotos:                            # se arman solas según sean horizontales o verticales
+fotos:                            # se intercalan solas en el texto (ver abajo)
   - src: ./cascada.jpg
     pie: Pie de foto opcional
 borrador: false                   # true = no se publica

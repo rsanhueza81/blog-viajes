@@ -1,8 +1,7 @@
 ---
 import { Image, getImage } from 'astro:assets';
-import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Ensayo from '../../components/Ensayo.astro';
+import Relato from '../../components/Relato.astro';
 import {
   fecha,
   rinconesPublicados,
@@ -30,23 +29,22 @@ const n = delViaje.findIndex((r) => r.rincon.id === rincon.id);
 const anterior = delViaje[n - 1]?.rincon;
 const siguiente = delViaje[n + 1]?.rincon;
 const pais = rincon.data.pais ?? viaje.data.pais;
-const { Content } = await render(rincon);
 const og = await getImage({ src: rincon.data.portada, width: 1200 });
 ---
 
 <Base titulo={rincon.data.nombre} descripcion={rincon.data.resumen} imagen={og.src}>
-  <article>
+  <article class="contenedor">
     <Image
       src={rincon.data.portada}
       alt={rincon.data.portadaAlt}
-      widths={[800, 1400, 2000, 2400]}
-      sizes="100vw"
+      widths={[800, 1400, 2000]}
+      sizes="(max-width: 85rem) 100vw, 80rem"
       loading="eager"
       fetchpriority="high"
       class="portada"
     />
 
-    <div class="contenedor">
+    <div>
       <header class="encabezado">
         <h1 class="ancho">{rincon.data.nombre}</h1>
         <p class="meta">
@@ -56,11 +54,7 @@ const og = await getImage({ src: rincon.data.portada, width: 1200 });
         </p>
       </header>
 
-      <div class="prosa">
-        <Content />
-      </div>
-
-      <Ensayo fotos={rincon.data.fotos} nombre={rincon.data.nombre} />
+      <Relato html={rincon.rendered?.html ?? ''} fotos={rincon.data.fotos} nombre={rincon.data.nombre} />
 
       <nav class="vecinas" aria-label="Otros rincones del viaje">
         {
@@ -92,7 +86,7 @@ const og = await getImage({ src: rincon.data.portada, width: 1200 });
 <style>
   .portada {
     width: 100%;
-    height: min(45rem, 80vh);
+    height: min(40rem, 72vh);
     object-fit: cover;
     background: var(--fondo-2);
   }

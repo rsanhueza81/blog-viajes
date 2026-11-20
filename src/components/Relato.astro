@@ -1,69 +1,56 @@
 ---
-// Fotos del rincón, armadas solas según su orientación:
-// horizontales a todo el ancho o de a dos, verticales de a dos o al lado de su pie.
+// Texto del rincón con las fotos intercaladas en distintos tamaños.
 import { Image, getImage } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { armarTramos, type Foto } from '../lib/relato';
 
-type Foto = { src: ImageMetadata; pie?: string };
 interface Props {
+  html: string;
   fotos: Foto[];
   nombre: string;
 }
 
-const { fotos, nombre } = Astro.props;
-
-const esVertical = (f: Foto) => f.src.height > f.src.width;
-type Grupo = { tipo: 'completa' | 'par' | 'lado'; fotos: { foto: Foto; n: number }[] };
-const grupos: Grupo[] = [];
-for (let i = 0; i < fotos.length; ) {
-  const f = fotos[i];
-  const sig = fotos[i + 1];
-  const anterior = grupos[grupos.length - 1];
-  if (esVertical(f)) {
-    if (sig && esVertical(sig)) {
-      grupos.push({ tipo: 'par', fotos: [{ foto: f, n: i }, { foto: sig, n: i + 1 }] });
-      i += 2;
-    } else {
-      grupos.push({ tipo: 'lado', fotos: [{ foto: f, n: i }] });
-      i += 1;
-    }
-  } else if (anterior?.tipo === 'completa' && sig && !esVertical(sig)) {
-    grupos.push({ tipo: 'par', fotos: [{ foto: f, n: i }, { foto: sig, n: i + 1 }] });
-    i += 2;
-  } else {
-    grupos.push({ tipo: 'completa', fotos: [{ foto: f, n: i }] });
-    i += 1;
-  }
-}
-
+const { html, fotos, nombre } = Astro.props;
+const tramos = armarTramos(html, fotos);
 const grandes = await Promise.all(
   fotos.map((f) => getImage({ src: f.src, width: Math.min(2200, f.src.width), format: 'webp' }))
 );
 const alt = (f: Foto, n: number) => f.pie ?? `Foto ${n + 1} de ${nombre}`;
+const tamanos = {
+  ancha: { widths: [800, 1200, 1600], sizes: '(max-width: 64rem) 100vw, 64rem' },
+  lado: { widths: [500, 800, 1100], sizes: '(max-width: 48rem) 100vw, 36rem' },
+  columna: { widths: [500, 800, 1100], sizes: '(max-width: 48rem) 100vw, 40rem' },
+  par: { widths: [500, 800, 1100], sizes: '(max-width: 48rem) 100vw, 32rem' },
+};
 ---
 
-{
-  fotos.length > 0 && (
-    <section class="ensayo" aria-label={`Fotos de ${nombre}`}>
-      {grupos.map((g) => (
-        <div class:list={['grupo', `grupo--${g.tipo}`]}>
-          {g.fotos.map(({ foto, n }) => (
-            <figure>
-              <a href={grandes[n].src} data-grande={grandes[n].src} data-pie={foto.pie ?? ''}>
-                <Image
-                  src={foto.src}
-                  alt={alt(foto, n)}
-                  widths={g.tipo === 'completa' ? [800, 1400, 2000] : [600, 900, 1300]}
-                  sizes={g.tipo === 'completa' ? '(max-width: 85rem) 100vw, 85rem' : '(max-width: 48rem) 100vw, 50vw'}
-                  loading="lazy"
-                />
-              </a>
-              {foto.pie && g.tipo !== 'lado' && <figcaption>{foto.pie}</figcaption>}
-            </figure>
-          ))}
-          {g.tipo === 'lado' && <p class="pie-lado">{g.fotos[0].foto.pie}</p>}
-        </div>
-      ))}
+<div class="relato">
+  {
+    tramos.map((t, i) => (
+      <section class:list={['tramo', t.grupo && `tramo--${t.grupo.tipo}`]}>
+        {t.html && <div class:list={['prosa', { 'prosa--inicio': i === 0 }]} set:html={t.html} />}
+        {t.grupo && (
+          <div class="fotos">
+            {t.grupo.fotos.map(({ foto, n }) => (
+              <figure>
+                <a href={grandes[n].src} data-grande={grandes[n].src} data-pie={foto.pie ?? ''}>
+                  <Image
+                    src={foto.src}
+                    alt={alt(foto, n)}
+                    widths={tamanos[t.grupo!.tipo].widths}
+                    sizes={tamanos[t.grupo!.tipo].sizes}
+                    loading="lazy"
+                  />
+                </a>
+                {foto.pie && <figcaption>{foto.pie}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+      </section>
+    ))
+  }
+  {
+    fotos.length > 0 && (
       <dialog class="visor" aria-label="Foto ampliada">
         <figure>
           <img alt="" />
@@ -76,14 +63,14 @@ const alt = (f: Foto, n: number) => f.pie ?? `Foto ${n + 1} de ${nombre}`;
           <button type="button" data-accion="cerrar">Cerrar</button>
         </div>
       </dialog>
-    </section>
-  )
-}
+    )
+  }
+</div>
 
 <script>
-  document.querySelectorAll<HTMLElement>('.ensayo').forEach((ensayo) => {
-    const enlaces = [...ensayo.querySelectorAll<HTMLAnchorElement>('a[data-grande]')];
-    const visor = ensayo.querySelector<HTMLDialogElement>('.visor');
+  document.querySelectorAll<HTMLElement>('.relato').forEach((relato) => {
+    const enlaces = [...relato.querySelectorAll<HTMLAnchorElement>('a[data-grande]')];
+    const visor = relato.querySelector<HTMLDialogElement>('.visor');
     if (!visor || enlaces.length === 0) return;
     const img = visor.querySelector('img')!;
     const pie = visor.querySelector('figcaption')!;
@@ -119,66 +106,94 @@ const alt = (f: Foto, n: number) => f.pie ?? `Foto ${n + 1} de ${nombre}`;
 </script>
 
 <style>
-  .ensayo {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 4.5rem;
+  .tramo + .tramo {
+    margin-top: 4rem;
+  }
+  /* Después de una foto al lado, el texto sigue con el espacio normal entre párrafos */
+  .tramo--lado + .tramo {
+    margin-top: 1.4rem;
+  }
+  /* El espacio entre tramos ya separa; un subtítulo al inicio no suma más aire */
+  .tramo :global(.prosa > :first-child) {
+    margin-top: 0;
   }
   figure {
     margin: 0;
   }
-  .grupo a {
+  .fotos a {
     display: block;
     cursor: zoom-in;
     background: var(--fondo-2);
   }
-  .grupo img {
+  .fotos img {
     width: 100%;
+  }
+  figcaption {
+    margin-top: 0.625rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--texto-suave);
+  }
+
+  /* Foto ancha: más que el texto, sin llegar a los bordes */
+  .tramo--ancha .fotos {
+    margin-top: 3.5rem;
+    max-width: 64rem;
+  }
+  .tramo--ancha img {
+    max-height: 80vh;
     object-fit: cover;
   }
-  .grupo--completa img {
-    max-height: 85vh;
+
+  /* Foto del ancho de la columna de texto */
+  .tramo--columna .fotos {
+    margin-top: 3rem;
+    max-width: var(--ancho-texto);
   }
-  .grupo--par {
+
+  /* Dos fotos lado a lado */
+  .tramo--par .fotos {
+    margin-top: 3.5rem;
+    max-width: 64rem;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
     align-items: start;
   }
-  .grupo--par img {
+  .tramo--par img {
     aspect-ratio: 4 / 5;
+    object-fit: cover;
   }
-  .grupo--lado {
+
+  /* Foto al lado del texto */
+  .tramo--lado {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: 2.5rem;
-    align-items: end;
-    margin-block: 3.5rem;
+    grid-template-columns: minmax(0, var(--ancho-texto)) minmax(0, 32rem);
+    gap: 4rem;
+    align-items: start;
   }
-  .grupo--lado img {
-    max-height: 90vh;
+  .tramo--lado .fotos {
+    padding-top: 0.5rem;
   }
-  figcaption,
-  .pie-lado {
-    margin: 0.625rem 0 0;
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    color: var(--texto-suave);
-    font-style: italic;
+  .tramo--lado img {
+    max-height: 85vh;
+    object-fit: cover;
   }
-  .pie-lado {
-    font-size: 1.0625rem;
-    margin: 0;
-  }
-  @media (max-width: 48rem) {
-    .grupo--par,
-    .grupo--lado {
+
+  @media (max-width: 56rem) {
+    .tramo--lado {
       grid-template-columns: 1fr;
+      gap: 0;
     }
-    .grupo--lado {
-      gap: 0.625rem;
-      margin-block: 0;
+    .tramo--lado .fotos {
+      margin-top: 3rem;
+      padding-top: 0;
+    }
+  }
+  @media (max-width: 40rem) {
+    .tramo--par .fotos {
+      grid-template-columns: 1fr;
     }
   }
 

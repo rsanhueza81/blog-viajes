@@ -103,7 +103,7 @@ h3 {
 .prosa > * + * {
   margin-top: 1.2em;
 }
-.prosa > p:first-child {
+.prosa--inicio > p:first-child {
   font-size: 1.625rem;
   line-height: 1.45;
   font-weight: 500;
