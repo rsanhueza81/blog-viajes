@@ -88,7 +88,8 @@ Después, el texto en markdown. Se pueden usar ## subtítulos, > citas y listas.
 
 3. Revisar con `npm run build` que compile sin errores. Si una foto dice un `lugar` que no está en
    `lugares`, el build falla y dice cuál.
-4. Commit en español describiendo la entrada (ej. "Agrega rincón Sur de Islandia al viaje Islandia")
+4. Mostrarle a Roberto la maqueta (ver "Cómo trabaja Roberto un rincón") y esperar su ok.
+5. Commit en español describiendo la entrada (ej. "Agrega rincón Sur de Islandia al viaje Islandia")
    y push a `main`.
 
 ## Cómo trabaja Roberto un rincón (acordado)
@@ -113,7 +114,10 @@ Sus viajes ya los hizo: trae fotos y recuerdos, no escribe en vivo.
    - **¿Volvería?**: una reflexión corta de si volvería a este lugar y por qué.
    Van al final del texto del rincón, en ese orden, cada una como subtítulo `##`.
 5. Con sus respuestas se arma un texto preliminar con sus palabras; él lo corrige y complementa.
-6. Vista previa y publicar.
+6. Revisión final con maqueta, SIEMPRE antes de publicar: se le manda la vista previa del rincón
+   completo en formato celular (390 px de ancho, página entera, con las fotos cargadas), más la de
+   computador y la portada. Se publica solo cuando él da el ok explícito ("publica"). Si pide
+   cambios, se corrige y se le muestra la maqueta de nuevo. Nunca publicar directo.
 
 ## Reglas
 
