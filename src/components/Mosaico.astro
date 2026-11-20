@@ -9,23 +9,48 @@ interface Props {
 }
 
 const { rincones, etiqueta = 'Rincones' } = Astro.props;
-// Patrón de tamaños: grande, alta, normal, normal, ancha, normal, normal
-const patron = ['grande', 'alta', '', '', 'ancha', '', ''];
+
+// Tamaños según cuántos rincones hay, para que el mosaico siempre quede completo
+// (sin rellenar con otras fotos: solo se reparten mejor las que hay).
+// Con 4 o más se alternan dos bloques que llenan filas enteras:
+//   A (2 filas): grande, alta, normal, normal   B (1 fila): ancha, normal, normal
+function tamanos(n: number): string[] {
+  if (n === 1) return ['completa'];
+  if (n === 2) return ['mitad', 'mitad'];
+  if (n === 3) return ['grande', 'ancha', 'ancha'];
+  const bloques = [
+    ['grande', 'alta', '', ''],
+    ['ancha', '', ''],
+  ];
+  const t: string[] = [];
+  let b = 0;
+  while (t.length < n) {
+    const bloque = bloques[b % 2];
+    const quedan = n - t.length;
+    if (quedan >= bloque.length) t.push(...bloque);
+    else if (quedan === 1) t.push('fila');
+    else if (quedan === 2) t.push('ancha', 'ancha');
+    else t.push('ancha', '', '');
+    b++;
+  }
+  return t;
+}
+const patron = tamanos(rincones.length);
 ---
 
 <ul class="mosaico" aria-label={etiqueta}>
   {
     rincones.map((item, i) => {
-      const tamano = patron[i % patron.length];
-      const grande = tamano === 'grande';
+      const tamano = patron[i];
+      const grande = ['grande', 'completa', 'mitad'].includes(tamano);
       return (
         <li class:list={['tile', tamano && `tile--${tamano}`]}>
           <a href={urlRincon(item.rincon)}>
             <Image
               src={item.rincon.data.portada}
               alt={item.rincon.data.portadaAlt}
-              widths={grande ? [700, 1100, 1600] : [500, 800, 1100]}
-              sizes={grande ? '(max-width: 48rem) 100vw, 50vw' : '(max-width: 48rem) 50vw, 25vw'}
+              widths={tamano === 'completa' ? [800, 1400, 2000] : grande ? [700, 1100, 1600] : [500, 800, 1100]}
+              sizes={tamano === 'completa' ? '(max-width: 85rem) 100vw, 85rem' : grande ? '(max-width: 48rem) 100vw, 50vw' : '(max-width: 48rem) 50vw, 25vw'}
               loading={i < 3 ? 'eager' : 'lazy'}
             />
             <span class="tile__texto">
@@ -50,6 +75,17 @@ const patron = ['grande', 'alta', '', '', 'ancha', '', ''];
     grid-auto-flow: dense;
     gap: 10px;
   }
+  .tile--completa {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+  .tile--mitad {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .tile--fila {
+    grid-column: span 4;
+  }
   .tile--grande {
     grid-column: span 2;
     grid-row: span 2;
@@ -66,6 +102,8 @@ const patron = ['grande', 'alta', '', '', 'ancha', '', ''];
     height: 100%;
     overflow: hidden;
     background: var(--fondo-2);
+    /* el texto va sobre la foto: siempre claro, en cualquier tema */
+    color: #f3efe8;
     text-decoration: none;
   }
   .tile img {
@@ -100,26 +138,41 @@ const patron = ['grande', 'alta', '', '', 'ancha', '', ''];
     font-size: 1.75rem;
     line-height: 1;
   }
-  .tile--grande .tile__nombre {
+  .tile--grande .tile__nombre,
+  .tile--completa .tile__nombre,
+  .tile--mitad .tile__nombre {
     font-size: clamp(2.25rem, 4.5vw, 4rem);
     line-height: 0.95;
     letter-spacing: -0.03em;
   }
-  .tile--ancha .tile__nombre {
+  .tile--ancha .tile__nombre,
+  .tile--fila .tile__nombre {
     font-size: 2.5rem;
+  }
+  .tile--completa .tile__nombre {
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
   }
   .tile__lugar {
     font-size: 0.875rem;
     line-height: 1.3;
     color: #d6d0c5;
   }
-  .tile--grande .tile__lugar {
+  .tile--grande .tile__lugar,
+  .tile--completa .tile__lugar,
+  .tile--mitad .tile__lugar {
     font-size: 0.9375rem;
   }
   @media (max-width: 48rem) {
     .mosaico {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-auto-rows: 12.5rem;
+    }
+    .tile--completa,
+    .tile--fila {
+      grid-column: span 2;
+    }
+    .tile--mitad {
+      grid-row: span 1;
     }
     .tile__nombre,
     .tile--ancha .tile__nombre {

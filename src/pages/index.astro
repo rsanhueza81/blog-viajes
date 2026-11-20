@@ -8,12 +8,17 @@ import { rinconesPublicados, viajesConRincones } from '../lib/datos';
 
 const rincones = await rinconesPublicados();
 const viajes = await viajesConRincones();
+const anos = viajes.flatMap(({ viaje }) => [viaje.data.inicio, viaje.data.fin ?? viaje.data.inicio]).map((d) => d.getUTCFullYear());
+const desde = anos.length ? Math.min(...anos) : undefined;
+const hasta = anos.length ? Math.max(...anos) : undefined;
+const periodo = desde === undefined ? '' : desde === hasta ? `${desde}` : `${desde} a ${hasta}`;
 const og = rincones[0] ? await getImage({ src: rincones[0].rincon.data.portada, width: 1200 }) : undefined;
 ---
 
 <Base imagen={og?.src}>
   <div class="contenedor">
     <h1 class="titular ancho">{SITIO.bajada}</h1>
+    {periodo && <p class="periodo">{periodo}</p>}
 
     {rincones.length === 0 && <p class="vacio">El primer rincón aparece aquí apenas se publique.</p>}
     {rincones.length > 0 && <Mosaico rincones={rincones} />}
@@ -32,10 +37,16 @@ const og = rincones[0] ? await getImage({ src: rincones[0].rincon.data.portada, 
 
 <style>
   .titular {
-    margin: 3.5rem 0 3rem;
+    margin: 3.5rem 0 0;
     font-size: clamp(2.75rem, 7vw, 6.5rem);
     line-height: 0.92;
     max-width: 18ch;
+  }
+  .periodo {
+    margin: 1rem 0 3rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--acento);
   }
   .vacio {
     color: var(--texto-suave);

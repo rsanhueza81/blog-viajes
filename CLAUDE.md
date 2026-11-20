@@ -8,7 +8,12 @@ Todo el contenido y la interfaz están en español de Chile.
 
 ## Cómo está armado
 
-Diseño "Galería": fondo oscuro, fotos grandes, títulos en Archivo ancho.
+Diseño "Galería": fotos grandes, títulos en Archivo ancho y texto de lectura en Newsreader.
+Dos temas de color (variables en `src/styles/global.css`, prop `tema` de `Base.astro`):
+**Pizarra** (azul grisáceo oscuro, acento ámbar) en la portada y Sobre mí; **Arena** (beige
+tostado, texto oscuro, acento rojizo) en las páginas de rincones y de viajes. El mosaico se adapta
+a la cantidad de rincones para no dejar huecos (`src/components/Mosaico.astro`). En la portada,
+bajo el título, van los años del primer al último viaje.
 
 - Un **viaje** agrupa varios rincones (ej. el viaje "Islandia" tiene los rincones
   "Sur de Islandia" y "Triángulo Dorado"). Es un archivo en `src/content/viajes/<id-viaje>.md`.
@@ -25,9 +30,9 @@ Diseño "Galería": fondo oscuro, fotos grandes, títulos en Archivo ancho.
   lista `fotos` es el orden en que aparecen.
 - Cada rincón puede tener `lugares`: los puntos específicos del recorrido (ej. Seljalandsfoss,
   Vík). Con ellos se arma la sección "El recorrido": un mapa con puntos numerados en ese orden,
-  unidos por la ruta, y una lista al lado con link "Ver en Google Maps" por lugar
-  (`src/components/Mapa.astro`). El mapa es de OpenStreetMap, gratis y sin cuentas, oscurecido con
-  CSS; se carga recién cuando el lector llega a él. Las fotos (y la portada, con `portadaLugar`)
+  unidos por la ruta, al final del rincón, y una lista al lado con link "Ver en Google Maps" por lugar
+  (`src/components/Mapa.astro`). El mapa es de OpenStreetMap, gratis y sin cuentas, teñido con CSS
+  según el tema; se carga recién cuando el lector llega a él. Las fotos (y la portada, con `portadaLugar`)
   pueden decir en qué `lugar` se sacaron: el pie muestra el número y el nombre, y al tocar el punto
   en el mapa aparece esa foto. Si un rincón no tiene `lugares`, no hay mapa.
 - Nombre, bajada y autor del blog: `src/config.ts`.

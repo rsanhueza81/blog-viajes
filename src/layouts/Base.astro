@@ -9,9 +9,11 @@ interface Props {
   titulo?: string;
   descripcion?: string;
   imagen?: string;
+  // 'pizarra' (oscuro, portada) o 'arena' (claro, rincones y viajes)
+  tema?: 'pizarra' | 'arena';
 }
 
-const { titulo, descripcion = SITIO.bajada, imagen } = Astro.props;
+const { titulo, descripcion = SITIO.bajada, imagen, tema = 'pizarra' } = Astro.props;
 const tituloPagina = titulo ? `${titulo} | ${SITIO.titulo}` : `${SITIO.titulo}: ${SITIO.bajada}`;
 const canonica = new URL(Astro.url.pathname, Astro.site);
 const ruta = Astro.url.pathname;
@@ -21,7 +23,7 @@ const enInicio = ruta === url();
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-tema={tema}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,7 +37,7 @@ const enInicio = ruta === url();
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonica} />
     {imagen && <meta property="og:image" content={new URL(imagen, Astro.site)} />}
-    <meta name="theme-color" content="#22211f" />
+    <meta name="theme-color" content={tema === 'arena' ? '#d9cfbf' : '#2a3642'} />
   </head>
   <body>
     <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -88,7 +90,7 @@ const enInicio = ruta === url();
   nav a:hover,
   nav a[aria-current='page'] {
     color: var(--texto);
-    border-bottom-color: var(--texto);
+    border-bottom-color: var(--acento);
   }
   .pie {
     margin-top: 7rem;

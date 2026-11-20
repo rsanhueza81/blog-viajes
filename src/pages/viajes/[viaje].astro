@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 const { viaje, rincones } = Astro.props as { viaje: Viaje; rincones: RinconConViaje[] };
 ---
 
-<Base titulo={viaje.data.titulo} descripcion={viaje.data.descripcion ?? `Rincones de ${viaje.data.titulo}`}>
+<Base tema="arena" titulo={viaje.data.titulo} descripcion={viaje.data.descripcion ?? `Rincones de ${viaje.data.titulo}`}>
   <div class="contenedor">
     <header class="cabeza">
       <h1 class="ancho">{viaje.data.titulo}</h1>

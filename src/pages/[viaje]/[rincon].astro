@@ -44,7 +44,7 @@ fotos.forEach((f) => {
 });
 ---
 
-<Base titulo={rincon.data.nombre} descripcion={rincon.data.resumen} imagen={og.src}>
+<Base tema="arena" titulo={rincon.data.nombre} descripcion={rincon.data.resumen} imagen={og.src}>
   <article class="contenedor">
     <Image
       src={rincon.data.portada}
@@ -74,9 +74,9 @@ fotos.forEach((f) => {
         </p>
       </header>
 
-      <Mapa lugares={lugares} fotos={fotosMapa} />
-
       <Relato html={rincon.rendered?.html ?? ''} fotos={fotos} nombre={rincon.data.nombre} />
+
+      <Mapa lugares={lugares} fotos={fotosMapa} />
 
       <nav class="vecinas" aria-label="Otros rincones del viaje">
         {
@@ -126,7 +126,7 @@ fotos.forEach((f) => {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--texto);
+    background: var(--acento);
     color: var(--fondo);
     font-size: 0.75rem;
     font-weight: 800;

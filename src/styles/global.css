@@ -1,20 +1,40 @@
 @import '@fontsource-variable/archivo/wdth.css';
 @import '@fontsource-variable/archivo/wdth-italic.css';
+@import '@fontsource-variable/newsreader/wght.css';
+@import '@fontsource-variable/newsreader/wght-italic.css';
 
 :root {
-  --fondo: #22211f;
-  --fondo-2: #2e2d2a;
-  --texto: #ece8e1;
-  --texto-cuerpo: #d9d4cb;
-  --texto-suave: #a8a296;
-  --regla: #3a3935;
+  /* Tema Pizarra (portada y Sobre mí): azul grisáceo oscuro */
+  --fondo: #2a3642;
+  --fondo-2: #344250;
+  --texto: #f1ede6;
+  --texto-cuerpo: #dcd9d3;
+  --texto-suave: #a9b3bd;
+  --regla: #445362;
+  --acento: #f0b560;
+  --mapa-filtro: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.6);
+  color-scheme: dark;
 
   --fuente: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  /* Letra de libro para leer los relatos */
+  --lectura: 'Newsreader Variable', 'Newsreader', Georgia, serif;
 
   --ancho: 85rem;
   --ancho-texto: 40rem;
   --margen: clamp(1.25rem, 3vw, 2.5rem);
-  color-scheme: dark;
+}
+
+/* Tema Arena (rincones y viajes): beige tostado con texto oscuro */
+[data-tema='arena'] {
+  --fondo: #d9cfbf;
+  --fondo-2: #cabfad;
+  --texto: #231f1a;
+  --texto-cuerpo: #3b352d;
+  --texto-suave: #665d50;
+  --regla: #bdb19d;
+  --acento: #8f3d1f;
+  --mapa-filtro: sepia(0.25) saturate(0.8);
+  color-scheme: light;
 }
 
 *,
@@ -48,7 +68,7 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid var(--texto);
+  outline: 3px solid var(--acento);
   outline-offset: 3px;
 }
 
@@ -96,6 +116,10 @@ h3 {
 .prosa {
   max-width: var(--ancho-texto);
   color: var(--texto-cuerpo);
+  font-family: var(--lectura);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  font-optical-sizing: auto;
 }
 .prosa > * {
   margin-block: 0;
@@ -104,12 +128,13 @@ h3 {
   margin-top: 1.2em;
 }
 .prosa--inicio > p:first-child {
-  font-size: 1.625rem;
-  line-height: 1.45;
-  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.4;
+  font-weight: 400;
   color: var(--texto);
 }
 .prosa > h2 {
+  font-family: var(--fuente);
   font-size: 1.75rem;
   font-weight: 700;
   font-stretch: 112%;
@@ -117,6 +142,7 @@ h3 {
   margin-top: 2em;
 }
 .prosa > h3 {
+  font-family: var(--fuente);
   font-size: 1.375rem;
   font-weight: 700;
   color: var(--texto);
@@ -128,11 +154,15 @@ h3 {
 }
 .prosa a {
   color: var(--texto);
+  text-decoration-color: var(--acento);
+  text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
 .prosa blockquote {
   margin-inline: 0;
-  font-size: 1.5rem;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--acento);
+  font-size: 1.625rem;
   line-height: 1.4;
   font-style: italic;
   color: var(--texto);

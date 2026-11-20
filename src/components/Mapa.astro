@@ -74,7 +74,7 @@ const datos = await Promise.all(
 
     const puntos = lugares.map((l) => [l.lat, l.lon] as [number, number]);
     if (puntos.length > 1) {
-      L.polyline(puntos, { color: '#ece8e1', weight: 2, opacity: 0.75, dashArray: '4 7' }).addTo(mapa);
+      L.polyline(puntos, { color: getComputedStyle(caja).getPropertyValue('--acento').trim() || '#e3a857', weight: 2.5, opacity: 0.9, dashArray: '4 7' }).addTo(mapa);
     }
 
     const marcadores = new Map<number, ReturnType<typeof L.marker>>();
@@ -124,7 +124,7 @@ const datos = await Promise.all(
 
 <style>
   .recorrido {
-    margin-bottom: 4.5rem;
+    margin-top: 5.5rem;
   }
   .recorrido h2 {
     font-size: 1.75rem;
@@ -170,6 +170,7 @@ const datos = await Promise.all(
   }
   .lugar:hover .lugar__nombre {
     text-decoration: underline;
+    text-decoration-color: var(--acento);
     text-underline-offset: 3px;
   }
   .lugar__google {
@@ -188,7 +189,7 @@ const datos = await Promise.all(
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: var(--texto);
+    background: var(--acento);
     color: var(--fondo);
     font-size: 0.875rem;
     font-weight: 800;
@@ -196,18 +197,18 @@ const datos = await Promise.all(
 
   /* Mapa oscuro: solo se oscurecen las teselas, no los puntos ni los globos */
   .mapa :global(.leaflet-tile-pane) {
-    filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.6);
+    filter: var(--mapa-filtro);
   }
   .mapa :global(.leaflet-container),
   .mapa:global(.leaflet-container) {
-    background: #2b2a27;
+    background: var(--fondo-2);
     font-family: var(--fuente);
   }
   .mapa :global(.marcador) {
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: var(--texto);
+    background: var(--acento);
     color: var(--fondo);
     font-size: 0.875rem;
     font-weight: 800;
@@ -240,7 +241,7 @@ const datos = await Promise.all(
     color: var(--texto) !important;
   }
   .mapa :global(.leaflet-control-attribution) {
-    background: rgba(34, 33, 31, 0.8);
+    background: var(--fondo);
     color: var(--texto-suave);
   }
   .mapa :global(.leaflet-control-attribution a) {
