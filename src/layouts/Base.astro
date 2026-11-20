@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import { SITIO } from '../config';
 import { url } from '../lib/datos';
+// Se precarga la letra principal para que el texto no salte cuando termina de cargar.
+import archivo from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 
 interface Props {
   titulo?: string;
@@ -23,6 +25,7 @@ const enInicio = ruta === url();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={archivo} as="font" type="font/woff2" crossorigin />
     <title>{tituloPagina}</title>
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonica} />

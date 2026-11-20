@@ -11,4 +11,6 @@ export default defineConfig({
   site: SITE,
   base: BASE,
   trailingSlash: 'always',
+  // El CSS es chico: va dentro de cada página para que no bloquee la primera pintura.
+  build: { inlineStylesheets: 'always' },
 });
