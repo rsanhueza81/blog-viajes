@@ -41,7 +41,17 @@ const tamanos = {
                     loading="lazy"
                   />
                 </a>
-                {foto.pie && <figcaption>{foto.pie}</figcaption>}
+                {(foto.pie || foto.lugar) && (
+                  <figcaption>
+                    {foto.lugar && (
+                      <span class="pie__lugar">
+                        {foto.lugarN && <span class="numero" aria-hidden="true">{foto.lugarN}</span>}
+                        {foto.lugar}
+                      </span>
+                    )}
+                    {foto.pie && <span class="pie__texto">{foto.pie}</span>}
+                  </figcaption>
+                )}
               </figure>
             ))}
           </div>
@@ -130,10 +140,35 @@ const tamanos = {
   }
   figcaption {
     margin-top: 0.625rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
     font-size: 0.9375rem;
     line-height: 1.5;
-    font-style: italic;
     color: var(--texto-suave);
+  }
+  .pie__lugar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--texto);
+  }
+  .pie__texto {
+    font-style: italic;
+  }
+  .numero {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--texto);
+    color: var(--fondo);
+    font-size: 0.75rem;
+    font-weight: 800;
+    font-style: normal;
   }
 
   /* Foto ancha: más que el texto, sin llegar a los bordes */

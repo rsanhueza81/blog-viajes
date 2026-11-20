@@ -2,6 +2,8 @@
 import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Relato from '../../components/Relato.astro';
+import Mapa from '../../components/Mapa.astro';
+import { lugaresDe } from '../../lib/lugares';
 import {
   fecha,
   rinconesPublicados,
@@ -30,6 +32,16 @@ const anterior = delViaje[n - 1]?.rincon;
 const siguiente = delViaje[n + 1]?.rincon;
 const pais = rincon.data.pais ?? viaje.data.pais;
 const og = await getImage({ src: rincon.data.portada, width: 1200 });
+
+// Lugares del recorrido: numeración compartida entre el mapa y los pies de foto.
+const { lugares, numero } = lugaresDe(rincon);
+const portadaN = numero(rincon.data.portadaLugar);
+const fotos = rincon.data.fotos.map((f) => ({ ...f, lugarN: numero(f.lugar) }));
+const fotosMapa = new Map<number, { src: typeof rincon.data.portada; alt: string }>();
+if (portadaN) fotosMapa.set(portadaN, { src: rincon.data.portada, alt: rincon.data.portadaAlt });
+fotos.forEach((f) => {
+  if (f.lugarN && !fotosMapa.has(f.lugarN)) fotosMapa.set(f.lugarN, { src: f.src, alt: f.pie ?? f.lugar ?? '' });
+});
 ---
 
 <Base titulo={rincon.data.nombre} descripcion={rincon.data.resumen} imagen={og.src}>
@@ -43,6 +55,14 @@ const og = await getImage({ src: rincon.data.portada, width: 1200 });
       fetchpriority="high"
       class="portada"
     />
+    {
+      rincon.data.portadaLugar && (
+        <p class="portada__lugar">
+          {portadaN && <span class="numero" aria-hidden="true">{portadaN}</span>}
+          {rincon.data.portadaLugar}
+        </p>
+      )
+    }
 
     <div>
       <header class="encabezado">
@@ -54,7 +74,9 @@ const og = await getImage({ src: rincon.data.portada, width: 1200 });
         </p>
       </header>
 
-      <Relato html={rincon.rendered?.html ?? ''} fotos={rincon.data.fotos} nombre={rincon.data.nombre} />
+      <Mapa lugares={lugares} fotos={fotosMapa} />
+
+      <Relato html={rincon.rendered?.html ?? ''} fotos={fotos} nombre={rincon.data.nombre} />
 
       <nav class="vecinas" aria-label="Otros rincones del viaje">
         {
@@ -89,6 +111,25 @@ const og = await getImage({ src: rincon.data.portada, width: 1200 });
     height: min(40rem, 72vh);
     object-fit: cover;
     background: var(--fondo-2);
+  }
+  .portada__lugar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.625rem 0 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+  .numero {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--texto);
+    color: var(--fondo);
+    font-size: 0.75rem;
+    font-weight: 800;
   }
   .encabezado {
     padding-block: 3.5rem 4rem;

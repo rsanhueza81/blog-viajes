@@ -5,10 +5,26 @@ viaje: islandia
 resumen: Cascadas, iglesias de madera solas frente al mar y puertos de pescadores con cerros nevados detrás.
 portada: ./portada.jpg
 portadaAlt: Montaña con forma de cono y una cascada en primer plano, con cielo despejado
+portadaLugar: Seljalandsfoss
+lugares:
+  - nombre: Seljalandsfoss
+    coordenadas: [63.6156, -19.9886]
+  - nombre: Skógafoss
+    coordenadas: [63.5321, -19.5114]
+  - nombre: Reynisfjara
+    coordenadas: [63.4044, -19.0447]
+  - nombre: Vík
+    coordenadas: [63.4186, -19.0060]
+  - nombre: Jökulsárlón
+    coordenadas: [64.0784, -16.2306]
+  - nombre: Höfn
+    coordenadas: [64.2539, -15.2082]
 fotos:
   - src: ./iglesia-negra.jpg
+    lugar: Vík
     pie: Una iglesia de madera negra, sola frente al mar.
   - src: ./puerto.jpg
+    lugar: Höfn
     pie: Barcos de pesca y cerros nevados, a pocos metros del muelle.
 ---
 

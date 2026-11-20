@@ -23,6 +23,13 @@ Diseño "Galería": fondo oscuro, fotos grandes, títulos en Archivo ancho.
   par, una vertical sola va al lado del texto, y las horizontales rotan entre ancha (más que el
   texto, sin llegar a los bordes), al lado del texto y del ancho de la columna. El orden de la
   lista `fotos` es el orden en que aparecen.
+- Cada rincón puede tener `lugares`: los puntos específicos del recorrido (ej. Seljalandsfoss,
+  Vík). Con ellos se arma la sección "El recorrido": un mapa con puntos numerados en ese orden,
+  unidos por la ruta, y una lista al lado con link "Ver en Google Maps" por lugar
+  (`src/components/Mapa.astro`). El mapa es de OpenStreetMap, gratis y sin cuentas, oscurecido con
+  CSS; se carga recién cuando el lector llega a él. Las fotos (y la portada, con `portadaLugar`)
+  pueden decir en qué `lugar` se sacaron: el pie muestra el número y el nombre, y al tocar el punto
+  en el mapa aparece esa foto. Si un rincón no tiene `lugares`, no hay mapa.
 - Nombre, bajada y autor del blog: `src/config.ts`.
 - Dominio y ruta base: `astro.config.mjs` (`SITE` y `BASE`).
 
@@ -57,8 +64,15 @@ pais: Islandia                    # opcional, solo si es distinto al del viaje
 resumen: Una o dos frases para buscadores y redes.
 portada: ./portada.jpg
 portadaAlt: Descripción breve de la foto principal
-fotos:                            # se intercalan solas en el texto (ver abajo)
-  - src: ./cascada.jpg
+portadaLugar: Seljalandsfoss      # opcional, uno de los nombres de `lugares`
+lugares:                          # opcional; en el orden del recorrido, arman el mapa
+  - nombre: Seljalandsfoss
+    coordenadas: [63.6156, -19.9886]   # [latitud, longitud]
+  - nombre: Skógafoss
+    coordenadas: [63.5321, -19.5114]
+fotos:                            # se intercalan solas en el texto (ver arriba)
+  - src: ./02-skogafoss.jpg
+    lugar: Skógafoss              # opcional, uno de los nombres de `lugares`
     pie: Pie de foto opcional
 borrador: false                   # true = no se publica
 ---
@@ -67,9 +81,25 @@ El primer párrafo sale más grande: que diga qué es el rincón y por qué vale
 Después, el texto en markdown. Se pueden usar ## subtítulos, > citas y listas.
 ```
 
-3. Revisar con `npm run build` que compile sin errores.
+3. Revisar con `npm run build` que compile sin errores. Si una foto dice un `lugar` que no está en
+   `lugares`, el build falla y dice cuál.
 4. Commit en español describiendo la entrada (ej. "Agrega rincón Sur de Islandia al viaje Islandia")
    y push a `main`.
+
+## Cómo trabaja Roberto un rincón (acordado)
+
+Sus viajes ya los hizo: trae fotos y recuerdos, no escribe en vivo.
+
+1. Entrega las fotos de cada rincón numeradas y con el lugar en el nombre del archivo, con dos
+   dígitos para que se ordenen bien: `01 Seljalandsfoss.jpg`, `02 Skógafoss.jpg`. Idealmente desde
+   una carpeta del computador (calidad completa y con ubicación GPS).
+2. Con eso se arman los `lugares` y el mapa. Coordenadas: primero las de la foto original
+   (`python3 scripts/leer-ubicacion.py fotos...`), si no las tiene, las del lugar conocido. Solo
+   lugares públicos (atracciones, pueblos, miradores), nunca alojamientos ni casas. Se le muestra
+   el mapa para que confirme que cada punto está bien antes de seguir.
+3. Se le hacen dos o tres preguntas cortas por foto (qué hacía ahí, qué recuerda, algún dato útil).
+4. Con sus respuestas se arma un texto preliminar con sus palabras; él lo corrige y complementa.
+5. Vista previa y publicar.
 
 ## Reglas
 

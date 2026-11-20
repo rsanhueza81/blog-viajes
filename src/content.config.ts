@@ -29,8 +29,27 @@ const rincones = defineCollection({
       resumen: z.string(),
       portada: image(),
       portadaAlt: z.string().default(''),
+      // Lugar de la portada (nombre de uno de los `lugares`), opcional.
+      portadaLugar: z.string().optional(),
+      // Lugares específicos del rincón, en el orden del recorrido: forman el mapa.
+      lugares: z
+        .array(
+          z.object({
+            nombre: z.string(),
+            // [latitud, longitud]
+            coordenadas: z.tuple([z.number().min(-90).max(90), z.number().min(-180).max(180)]),
+          })
+        )
+        .default([]),
       fotos: z
-        .array(z.object({ src: image(), pie: z.string().optional() }))
+        .array(
+          z.object({
+            src: image(),
+            pie: z.string().optional(),
+            // Nombre de uno de los `lugares`, opcional.
+            lugar: z.string().optional(),
+          })
+        )
         .default([]),
       borrador: z.boolean().default(false),
     }),

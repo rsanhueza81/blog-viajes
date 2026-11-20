@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",
-    "astro": "^7.4.13"
+    "astro": "^7.4.13",
+    "leaflet": "^1.9.4"
   },
   "private": true,
   "type": "module",

@@ -2,7 +2,7 @@
 // con tamaños distintos, para que no queden todas a lo ancho al final.
 import type { ImageMetadata } from 'astro';
 
-export type Foto = { src: ImageMetadata; pie?: string };
+export type Foto = { src: ImageMetadata; pie?: string; lugar?: string; lugarN?: number };
 export type TipoGrupo = 'ancha' | 'lado' | 'columna' | 'par';
 export type Grupo = { tipo: TipoGrupo; fotos: { foto: Foto; n: number }[] };
 export type Tramo = { html: string; grupo?: Grupo };
