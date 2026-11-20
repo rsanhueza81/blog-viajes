@@ -103,8 +103,17 @@ Sus viajes ya los hizo: trae fotos y recuerdos, no escribe en vivo.
    lugares públicos (atracciones, pueblos, miradores), nunca alojamientos ni casas. Se le muestra
    el mapa para que confirme que cada punto está bien antes de seguir.
 3. Se le hacen dos o tres preguntas cortas por foto (qué hacía ahí, qué recuerda, algún dato útil).
-4. Con sus respuestas se arma un texto preliminar con sus palabras; él lo corrige y complementa.
-5. Vista previa y publicar.
+4. Al final, después de las preguntas por foto, se le pregunta por cuatro secciones optativas.
+   Cada una se incluye solo si tiene contenido; si responde "no" o "nada", esa sección no va
+   (nunca se rellena ni se inventa):
+   - **Una anécdota**: ¿pasó algo divertido o alguna anécdota?
+   - **Para comer y tomar**: ¿algún plato o licor típico que valga la pena comentar? ¿Tiene foto?
+     (si la hay, se agrega a `fotos`).
+   - **Lo que quedó pendiente**: ¿algo que faltó hacer?
+   - **¿Volvería?**: una reflexión corta de si volvería a este lugar y por qué.
+   Van al final del texto del rincón, en ese orden, cada una como subtítulo `##`.
+5. Con sus respuestas se arma un texto preliminar con sus palabras; él lo corrige y complementa.
+6. Vista previa y publicar.
 
 ## Reglas
 
