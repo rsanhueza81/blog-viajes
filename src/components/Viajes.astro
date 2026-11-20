@@ -1,5 +1,6 @@
 ---
-// Lista de viajes: nombre, fechas y una tira con las fotos de sus rincones.
+// Lista de viajes: nombre, fechas y una tira con las portadas de sus 4 rincones
+// más recientes (el más nuevo primero). Solo fotos reales: no se rellenan huecos.
 import { Image } from 'astro:assets';
 import { cuantos, rangoViaje, urlViaje, type RinconConViaje, type Viaje } from '../lib/datos';
 
@@ -26,7 +27,7 @@ const Titulo = nivel;
           {viaje.data.descripcion && <p class="viaje__desc">{viaje.data.descripcion}</p>}
         </div>
         <a class="tira" href={urlViaje(viaje)} tabindex="-1" aria-hidden="true">
-          {rincones.slice(0, 4).map(({ rincon }) => (
+          {[...rincones].reverse().slice(0, 4).map(({ rincon }) => (
             <Image src={rincon.data.portada} alt="" widths={[300, 500]} sizes="(max-width: 48rem) 25vw, 15vw" loading="lazy" />
           ))}
         </a>

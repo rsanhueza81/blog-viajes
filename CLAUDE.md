@@ -15,6 +15,8 @@ Diseño "Galería": fondo oscuro, fotos grandes, títulos en Archivo ancho.
 - Un **rincón** es una entrada del blog y vive en su propia carpeta junto a sus fotos:
   `src/content/rincones/<id-viaje>/<id-rincon>/index.md`. La URL queda `/<id-viaje>/<id-rincon>/`.
 - La portada muestra todos los rincones en un mosaico (el más reciente, grande) y abajo los viajes.
+  En "Por viaje", cada viaje muestra las portadas de sus 4 rincones más recientes (el más nuevo
+  primero). Si tiene menos de 4, quedan huecos: Roberto no quiere rellenarlos con otras fotos.
 - Dentro de un viaje, el orden de los rincones sale de la `fecha` de cada uno.
 - Nombre, bajada y autor del blog: `src/config.ts`.
 - Dominio y ruta base: `astro.config.mjs` (`SITE` y `BASE`).
