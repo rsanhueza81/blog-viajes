@@ -1,0 +1,155 @@
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource-variable/archivo/wdth-italic.css';
+
+:root {
+  --fondo: #22211f;
+  --fondo-2: #2e2d2a;
+  --texto: #ece8e1;
+  --texto-cuerpo: #d9d4cb;
+  --texto-suave: #a8a296;
+  --regla: #3a3935;
+
+  --fuente: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+
+  --ancho: 85rem;
+  --ancho-texto: 40rem;
+  --margen: clamp(1.25rem, 3vw, 2.5rem);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: 1.1875rem;
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--texto);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--margen);
+}
+
+/* Títulos anchos: la voz de la marca */
+.ancho {
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.semiancho {
+  font-stretch: 112%;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.saltar {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  background: var(--texto);
+  color: var(--fondo);
+  padding: 0.5rem 1rem;
+  z-index: 10;
+}
+.saltar:focus {
+  left: 0.5rem;
+}
+
+/* Texto de cada rincón */
+.prosa {
+  max-width: var(--ancho-texto);
+  color: var(--texto-cuerpo);
+}
+.prosa > * {
+  margin-block: 0;
+}
+.prosa > * + * {
+  margin-top: 1.2em;
+}
+.prosa > p:first-child {
+  font-size: 1.625rem;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--texto);
+}
+.prosa > h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-stretch: 112%;
+  color: var(--texto);
+  margin-top: 2em;
+}
+.prosa > h3 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-top: 1.6em;
+}
+.prosa > h2 + *,
+.prosa > h3 + * {
+  margin-top: 0.6em;
+}
+.prosa a {
+  color: var(--texto);
+  text-underline-offset: 3px;
+}
+.prosa blockquote {
+  margin-inline: 0;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--texto);
+}
+.prosa ul,
+.prosa ol {
+  padding-left: 1.25rem;
+}
+.prosa img {
+  margin-block: 1.5em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

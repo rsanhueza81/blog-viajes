@@ -1,0 +1,54 @@
+---
+import { getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Mosaico from '../components/Mosaico.astro';
+import Viajes from '../components/Viajes.astro';
+import { SITIO } from '../config';
+import { rinconesPublicados, viajesConRincones } from '../lib/datos';
+
+const rincones = await rinconesPublicados();
+const viajes = await viajesConRincones();
+const og = rincones[0] ? await getImage({ src: rincones[0].rincon.data.portada, width: 1200 }) : undefined;
+---
+
+<Base imagen={og?.src}>
+  <div class="contenedor">
+    <h1 class="titular ancho">{SITIO.bajada}</h1>
+
+    {rincones.length === 0 && <p class="vacio">El primer rincón aparece aquí apenas se publique.</p>}
+    {rincones.length > 0 && <Mosaico rincones={rincones} />}
+
+    {
+      viajes.length > 0 && (
+        <section class="por-viaje" aria-labelledby="t-viajes">
+          <h2 id="t-viajes" class="ancho">Por viaje</h2>
+          <p class="por-viaje__bajada">Los mismos rincones, agrupados por el viaje en que los conocí.</p>
+          <Viajes viajes={viajes} />
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .titular {
+    margin: 3.5rem 0 3rem;
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    line-height: 0.92;
+    max-width: 18ch;
+  }
+  .vacio {
+    color: var(--texto-suave);
+  }
+  .por-viaje {
+    margin-top: 7rem;
+  }
+  .por-viaje h2 {
+    font-size: 2.5rem;
+  }
+  .por-viaje__bajada {
+    margin: 0.5rem 0 2.5rem;
+    font-size: 1.0625rem;
+    color: var(--texto-suave);
+  }
+</style>

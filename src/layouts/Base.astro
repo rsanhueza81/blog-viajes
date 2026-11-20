@@ -1,0 +1,103 @@
+---
+import '../styles/global.css';
+import { SITIO } from '../config';
+import { url } from '../lib/datos';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  imagen?: string;
+}
+
+const { titulo, descripcion = SITIO.bajada, imagen } = Astro.props;
+const tituloPagina = titulo ? `${titulo} | ${SITIO.titulo}` : `${SITIO.titulo}: ${SITIO.bajada}`;
+const canonica = new URL(Astro.url.pathname, Astro.site);
+const ruta = Astro.url.pathname;
+const enViajes = ruta.startsWith(url('viajes'));
+const enSobreMi = ruta.startsWith(url('sobre-mi'));
+const enInicio = ruta === url();
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloPagina}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
+    <meta property="og:title" content={titulo ?? SITIO.titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonica} />
+    {imagen && <meta property="og:image" content={new URL(imagen, Astro.site)} />}
+    <meta name="theme-color" content="#22211f" />
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Ir al contenido</a>
+    <header class="contenedor cabecera">
+      <a class="marca ancho" href={url()}>{SITIO.titulo}</a>
+      <nav aria-label="Principal">
+        <a href={url()} aria-current={enInicio ? 'page' : undefined}>Rincones</a>
+        <a href={url('viajes')} aria-current={enViajes ? 'page' : undefined}>Viajes</a>
+        <a href={url('sobre-mi')} aria-current={enSobreMi ? 'page' : undefined}>Sobre mí</a>
+      </nav>
+    </header>
+    <main id="contenido">
+      <slot />
+    </main>
+    <footer class="pie">
+      <div class="contenedor pie__fila">
+        <span>{SITIO.titulo}, de {SITIO.autor}</span>
+        <a href={url('viajes')}>Todos los viajes</a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-block: 1.75rem;
+  }
+  .marca {
+    font-size: 1.625rem;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  nav {
+    display: flex;
+    gap: 1.75rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+  nav a {
+    text-decoration: none;
+    padding-block: 0.25rem;
+    border-bottom: 2px solid transparent;
+    color: var(--texto-suave);
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--texto);
+    border-bottom-color: var(--texto);
+  }
+  .pie {
+    margin-top: 7rem;
+    border-top: 1px solid var(--regla);
+    font-size: 0.875rem;
+    color: var(--texto-suave);
+  }
+  .pie__fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-block: 2rem;
+  }
+</style>

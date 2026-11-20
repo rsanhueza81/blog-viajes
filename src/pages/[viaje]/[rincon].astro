@@ -1,0 +1,152 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Ensayo from '../../components/Ensayo.astro';
+import {
+  fecha,
+  rinconesPublicados,
+  slugRincon,
+  url,
+  urlRincon,
+  urlViaje,
+  type RinconConViaje,
+} from '../../lib/datos';
+
+export async function getStaticPaths() {
+  const todos = await rinconesPublicados();
+  return todos.map((item) => ({
+    params: { viaje: item.viaje.id, rincon: slugRincon(item.rincon) },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props as { item: RinconConViaje };
+const { rincon, viaje } = item;
+const delViaje = (await rinconesPublicados())
+  .filter((r) => r.viaje.id === viaje.id)
+  .sort((a, b) => a.rincon.data.fecha.valueOf() - b.rincon.data.fecha.valueOf());
+const n = delViaje.findIndex((r) => r.rincon.id === rincon.id);
+const anterior = delViaje[n - 1]?.rincon;
+const siguiente = delViaje[n + 1]?.rincon;
+const pais = rincon.data.pais ?? viaje.data.pais;
+const { Content } = await render(rincon);
+const og = await getImage({ src: rincon.data.portada, width: 1200 });
+---
+
+<Base titulo={rincon.data.nombre} descripcion={rincon.data.resumen} imagen={og.src}>
+  <article>
+    <Image
+      src={rincon.data.portada}
+      alt={rincon.data.portadaAlt}
+      widths={[800, 1400, 2000, 2400]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="portada"
+    />
+
+    <div class="contenedor">
+      <header class="encabezado">
+        <h1 class="ancho">{rincon.data.nombre}</h1>
+        <p class="meta">
+          {pais && <span>{pais}</span>}
+          <time datetime={rincon.data.fecha.toISOString().slice(0, 10)}>{fecha(rincon.data.fecha)}</time>
+          <a href={urlViaje(viaje)}>Viaje: {viaje.data.titulo}</a>
+        </p>
+      </header>
+
+      <div class="prosa">
+        <Content />
+      </div>
+
+      <Ensayo fotos={rincon.data.fotos} nombre={rincon.data.nombre} />
+
+      <nav class="vecinas" aria-label="Otros rincones del viaje">
+        {
+          anterior ? (
+            <a href={urlRincon(anterior)}>
+              <span class="vecinas__rotulo">Rincón anterior</span>
+              <span class="vecinas__nombre semiancho">{anterior.data.nombre}</span>
+            </a>
+          ) : (
+            <a href={url()}>
+              <span class="vecinas__rotulo">Volver</span>
+              <span class="vecinas__nombre semiancho">Todos los rincones</span>
+            </a>
+          )
+        }
+        {
+          siguiente && (
+            <a href={urlRincon(siguiente)} class="vecinas__siguiente">
+              <span class="vecinas__rotulo">Siguiente rincón</span>
+              <span class="vecinas__nombre semiancho">{siguiente.data.nombre}</span>
+            </a>
+          )
+        }
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .portada {
+    width: 100%;
+    height: min(45rem, 80vh);
+    object-fit: cover;
+    background: var(--fondo-2);
+  }
+  .encabezado {
+    padding-block: 3.5rem 4rem;
+  }
+  .encabezado h1 {
+    font-size: clamp(3.25rem, 10vw, 9.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    margin-left: -0.03em;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin: 1.5rem 0 0;
+    font-size: 1rem;
+    color: var(--texto-suave);
+  }
+  .meta a {
+    color: var(--texto);
+    text-underline-offset: 3px;
+  }
+  .vecinas {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 7rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--regla);
+  }
+  .vecinas a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    text-decoration: none;
+  }
+  .vecinas__siguiente {
+    margin-left: auto;
+    text-align: right;
+  }
+  .vecinas__rotulo {
+    font-size: 0.875rem;
+    color: var(--texto-suave);
+  }
+  .vecinas__nombre {
+    font-size: 2rem;
+    line-height: 1.05;
+  }
+  .vecinas a:hover .vecinas__nombre {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+  }
+</style>

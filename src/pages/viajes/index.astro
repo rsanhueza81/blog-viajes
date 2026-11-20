@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import Viajes from '../../components/Viajes.astro';
+import { viajesConRincones } from '../../lib/datos';
+
+const viajes = await viajesConRincones();
+---
+
+<Base titulo="Viajes" descripcion="Todos los viajes, cada uno con sus rincones">
+  <div class="contenedor">
+    <h1 class="titular ancho">Viajes</h1>
+    {viajes.length === 0 ? <p>Todavía no hay viajes publicados.</p> : <Viajes viajes={viajes} nivel="h2" />}
+  </div>
+</Base>
+
+<style>
+  .titular {
+    margin: 3.5rem 0 3.5rem;
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    line-height: 0.92;
+  }
+</style>

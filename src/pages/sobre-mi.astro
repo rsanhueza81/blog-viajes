@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITIO } from '../config';
+---
+
+<Base titulo="Sobre mí" descripcion={`Quién escribe ${SITIO.titulo}`}>
+  <div class="contenedor">
+    <h1 class="titular ancho">Sobre mí</h1>
+    <div class="prosa">
+      <p>Soy {SITIO.autor}. Aquí junto los rincones a los que volvería.</p>
+      <p>Cada viaje tiene varios rincones, y cada rincón tiene sus fotos y lo que vale la pena contar.</p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .titular {
+    margin: 3.5rem 0 3rem;
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    line-height: 0.92;
+  }
+</style>

@@ -1,0 +1,19 @@
+{
+  "name": "blog-viajes",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "astro": "^7.4.13"
+  },
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}
