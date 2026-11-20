@@ -3,9 +3,9 @@ import { defineConfig } from 'astro/config';
 
 // Dónde vive el sitio publicado.
 // Con GitHub Pages: https://<usuario>.github.io/<repo>/
-// Si algún día usas dominio propio, cambia SITE por el dominio y BASE por '/'.
-const SITE = 'https://rsanhueza81.github.io';
-const BASE = '/blog-viajes';
+// Con dominio propio: SITE es el dominio y BASE es '/'.
+const SITE = 'https://rinconesderoberto.cl';
+const BASE = '/';
 
 export default defineConfig({
   site: SITE,

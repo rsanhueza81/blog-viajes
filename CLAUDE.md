@@ -2,7 +2,7 @@
 
 Sitio estático en Astro, publicado en GitHub Pages con GitHub Actions
 (`.github/workflows/deploy.yml`). Cada push a `main` publica el sitio en
-https://rsanhueza81.github.io/blog-viajes/ en un par de minutos.
+https://rinconesderoberto.cl en un par de minutos.
 
 Todo el contenido y la interfaz están en español de Chile.
 
