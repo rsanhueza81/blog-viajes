@@ -38,6 +38,11 @@ bajo el título, van los años del primer al último viaje.
 - Vista previa al compartir links (WhatsApp, etc.): cada página lleva una imagen JPEG de 1200x630
   generada con `src/lib/compartir.ts` (en un rincón, su portada). Estadísticas de visitas: Cloudflare
   Web Analytics, con el token en `src/config.ts`.
+- Suscripción por correo: al final de todas las páginas hay un formulario compacto
+  (`src/components/Suscribir.astro`) que manda el correo a Buttondown (usuario en `src/config.ts`,
+  plan gratis hasta 100 suscriptores). El blog no guarda correos. El aviso de cada rincón nuevo lo
+  envía Roberto a mano desde Buttondown, con el texto que se le entrega al publicar. No hay envío
+  automático: Roberto no lo quiere por ahora.
 - Nombre, bajada y autor del blog: `src/config.ts`.
 - Dominio y ruta base: `astro.config.mjs` (`SITE` y `BASE`).
 
@@ -94,6 +99,8 @@ Después, el texto en markdown. Se pueden usar ## subtítulos, > citas y listas.
 4. Mostrarle a Roberto la maqueta (ver "Cómo trabaja Roberto un rincón") y esperar su ok.
 5. Commit en español describiendo la entrada (ej. "Agrega rincón Sur de Islandia al viaje Islandia")
    y push a `main`.
+6. Entregarle a Roberto el aviso para los suscriptores, listo para pegar en Buttondown: asunto
+   "Nuevo rincón: <nombre>" y un cuerpo corto con sus palabras y el link al rincón.
 
 ## Cómo trabaja Roberto un rincón (acordado)
 
