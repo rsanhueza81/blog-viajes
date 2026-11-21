@@ -11,12 +11,12 @@ const accion = SITIO.suscripcion ? `https://buttondown.com/api/emails/embed-subs
       <div class="contenedor suscribir__fila">
         <div>
           <h2 id="t-suscribir" class="semiancho">Avísame cuando haya un rincón nuevo</h2>
-          <p>Un correo cada vez que publico uno. Nada más, y te puedes salir cuando quieras.</p>
+          <p>Un correo por cada rincón que publico. Nada más.</p>
         </div>
         <form action={accion} method="post" target="_blank">
-          <label for="correo-suscribir">Tu correo</label>
+          <label class="oculto" for="correo-suscribir">Tu correo</label>
           <div class="suscribir__campo">
-            <input id="correo-suscribir" type="email" name="email" autocomplete="email" placeholder="nombre@correo.cl" required />
+            <input id="correo-suscribir" type="email" name="email" autocomplete="email" placeholder="Tu correo" required />
             <button type="submit">Suscribirme</button>
           </div>
         </form>
@@ -32,27 +32,28 @@ const accion = SITIO.suscripcion ? `https://buttondown.com/api/emails/embed-subs
   }
   .suscribir__fila {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 4rem;
-    align-items: end;
-    padding-block: 3rem 0;
+    grid-template-columns: 1fr minmax(0, 26rem);
+    gap: 1rem 4rem;
+    align-items: center;
+    padding-block: 2rem 0;
   }
   h2 {
     margin: 0;
-    font-size: 1.75rem;
-    line-height: 1.1;
+    font-size: 1.25rem;
+    line-height: 1.2;
   }
   p {
-    margin: 0.75rem 0 0;
-    max-width: 34ch;
+    margin: 0.25rem 0 0;
+    font-size: 0.9375rem;
     color: var(--texto-suave);
   }
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--texto-suave);
+  .oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .suscribir__campo {
     display: flex;
@@ -61,38 +62,35 @@ const accion = SITIO.suscripcion ? `https://buttondown.com/api/emails/embed-subs
   input {
     flex: 1;
     min-width: 0;
-    padding: 0.75rem 0.875rem;
+    padding: 0.5rem 0.75rem;
     font: inherit;
     font-size: 1rem;
     color: var(--texto);
-    background: var(--fondo-2);
+    background: transparent;
     border: 1px solid var(--regla);
     border-radius: 0.25rem;
   }
   input::placeholder {
     color: var(--texto-suave);
-    opacity: 0.8;
   }
   button {
-    padding: 0.75rem 1.25rem;
+    padding: 0.5rem 0.875rem;
     font: inherit;
-    font-size: 1rem;
+    font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--fondo);
-    background: var(--acento);
-    border: 0;
+    color: var(--acento);
+    background: transparent;
+    border: 1px solid var(--acento);
     border-radius: 0.25rem;
     cursor: pointer;
   }
   button:hover {
-    filter: brightness(1.08);
+    color: var(--fondo);
+    background: var(--acento);
   }
   @media (max-width: 720px) {
     .suscribir__fila {
       grid-template-columns: 1fr;
-    }
-    .suscribir__campo {
-      flex-direction: column;
     }
   }
 </style>
