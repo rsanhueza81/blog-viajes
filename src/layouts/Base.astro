@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { SITIO } from '../config';
 import { url } from '../lib/datos';
+import Suscribir from '../components/Suscribir.astro';
 import type { ImagenCompartir } from '../lib/compartir';
 // Se precarga la letra principal para que el texto no salte cuando termina de cargar.
 import archivo from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
@@ -66,6 +67,7 @@ const enInicio = ruta === url();
     <main id="contenido">
       <slot />
     </main>
+    <Suscribir />
     <footer class="pie">
       <div class="contenedor pie__fila">
         <span>{SITIO.titulo}, de {SITIO.autor}</span>
@@ -117,7 +119,7 @@ const enInicio = ruta === url();
     border-bottom-color: var(--acento);
   }
   .pie {
-    margin-top: 7rem;
+    margin-top: 3.5rem;
     border-top: 1px solid var(--regla);
     font-size: 0.875rem;
     color: var(--texto-suave);
