@@ -35,6 +35,9 @@ bajo el título, van los años del primer al último viaje.
   según el tema; se carga recién cuando el lector llega a él. Las fotos (y la portada, con `portadaLugar`)
   pueden decir en qué `lugar` se sacaron: el pie muestra el número y el nombre, y al tocar el punto
   en el mapa aparece esa foto. Si un rincón no tiene `lugares`, no hay mapa.
+- Vista previa al compartir links (WhatsApp, etc.): cada página lleva una imagen JPEG de 1200x630
+  generada con `src/lib/compartir.ts` (en un rincón, su portada). Estadísticas de visitas: Cloudflare
+  Web Analytics, con el token en `src/config.ts`.
 - Nombre, bajada y autor del blog: `src/config.ts`.
 - Dominio y ruta base: `astro.config.mjs` (`SITE` y `BASE`).
 

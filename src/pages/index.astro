@@ -1,9 +1,9 @@
 ---
-import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Mosaico from '../components/Mosaico.astro';
 import Viajes from '../components/Viajes.astro';
 import { SITIO } from '../config';
+import { imagenCompartir } from '../lib/compartir';
 import { rinconesPublicados, viajesConRincones } from '../lib/datos';
 
 const rincones = await rinconesPublicados();
@@ -12,10 +12,10 @@ const anos = viajes.flatMap(({ viaje }) => [viaje.data.inicio, viaje.data.fin ??
 const desde = anos.length ? Math.min(...anos) : undefined;
 const hasta = anos.length ? Math.max(...anos) : undefined;
 const periodo = desde === undefined ? '' : desde === hasta ? `${desde}` : `${desde} a ${hasta}`;
-const og = rincones[0] ? await getImage({ src: rincones[0].rincon.data.portada, width: 1200 }) : undefined;
+const og = rincones[0] ? await imagenCompartir(rincones[0].rincon.data.portada) : undefined;
 ---
 
-<Base imagen={og?.src}>
+<Base imagen={og} descripcion="Lugares a los que volvería, con mis fotos, un mapa y lo que recuerdo de cada uno.">
   <div class="contenedor">
     <h1 class="titular ancho">{SITIO.bajada}</h1>
     {periodo && <p class="periodo">{periodo}</p>}

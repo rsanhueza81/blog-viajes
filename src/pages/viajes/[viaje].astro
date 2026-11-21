@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Mosaico from '../../components/Mosaico.astro';
+import { imagenCompartir } from '../../lib/compartir';
 import { cuantos, rangoViaje, viajesConRincones, type RinconConViaje, type Viaje } from '../../lib/datos';
 
 export async function getStaticPaths() {
@@ -12,9 +13,10 @@ export async function getStaticPaths() {
 }
 
 const { viaje, rincones } = Astro.props as { viaje: Viaje; rincones: RinconConViaje[] };
+const og = await imagenCompartir(rincones[rincones.length - 1].rincon.data.portada);
 ---
 
-<Base tema="arena" titulo={viaje.data.titulo} descripcion={viaje.data.descripcion ?? `Rincones de ${viaje.data.titulo}`}>
+<Base tema="arena" imagen={og} titulo={viaje.data.titulo} descripcion={viaje.data.descripcion ?? `Rincones de ${viaje.data.titulo}`}>
   <div class="contenedor">
     <header class="cabeza">
       <h1 class="ancho">{viaje.data.titulo}</h1>

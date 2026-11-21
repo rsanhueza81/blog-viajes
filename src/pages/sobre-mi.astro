@@ -2,10 +2,13 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import foto from '../assets/roberto.jpg';
+import { imagenCompartir } from '../lib/compartir';
+
+const og = await imagenCompartir(foto, 'top');
 import { SITIO } from '../config';
 ---
 
-<Base titulo="Sobre mí" descripcion={`Quién escribe ${SITIO.titulo}`}>
+<Base imagen={og} titulo="Sobre mí" descripcion="Soy Roberto, chileno. Aquí junto los rincones a los que volvería.">
   <div class="contenedor">
     <h1 class="titular ancho">Sobre mí</h1>
     <div class="sobre">

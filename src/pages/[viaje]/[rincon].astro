@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Relato from '../../components/Relato.astro';
 import Mapa from '../../components/Mapa.astro';
 import { lugaresDe } from '../../lib/lugares';
+import { imagenCompartir } from '../../lib/compartir';
 import {
   fecha,
   rinconesPublicados,
@@ -31,7 +32,7 @@ const n = delViaje.findIndex((r) => r.rincon.id === rincon.id);
 const anterior = delViaje[n - 1]?.rincon;
 const siguiente = delViaje[n + 1]?.rincon;
 const pais = rincon.data.pais ?? viaje.data.pais;
-const og = await getImage({ src: rincon.data.portada, width: 1200 });
+const og = await imagenCompartir(rincon.data.portada);
 
 // Lugares del recorrido: numeración compartida entre el mapa y los pies de foto.
 const { lugares, numero } = lugaresDe(rincon);
@@ -44,7 +45,7 @@ fotos.forEach((f) => {
 });
 ---
 
-<Base tema="arena" titulo={rincon.data.nombre} descripcion={rincon.data.resumen} imagen={og.src}>
+<Base tema="arena" titulo={rincon.data.nombre} descripcion={rincon.data.resumen} imagen={og}>
   <article class="contenedor">
     <Image
       src={rincon.data.portada}
