@@ -4,4 +4,6 @@ export const SITIO = {
   bajada: 'Mis rincones favoritos',
   autor: 'Roberto Sanhueza',
   idioma: 'es-CL',
+  // Token de Cloudflare Web Analytics (estadísticas de visitas). Vacío = sin estadísticas.
+  analiticaToken: 'e398227dcb354412aa3cdd87a47024ef',
 };

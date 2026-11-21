@@ -58,6 +58,16 @@ const enInicio = ruta === url();
         <a href={url('viajes')}>Todos los viajes</a>
       </div>
     </footer>
+    {
+      SITIO.analiticaToken && import.meta.env.PROD && (
+        <script
+          is:inline
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: SITIO.analiticaToken })}
+        />
+      )
+    }
   </body>
 </html>
 
