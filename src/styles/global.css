@@ -133,6 +133,12 @@ h3 {
   font-weight: 400;
   color: var(--texto);
 }
+@media (max-width: 48rem) {
+  .prosa--inicio > p:first-child {
+    font-size: 1.3125rem;
+    line-height: 1.45;
+  }
+}
 .prosa > h2 {
   font-family: var(--fuente);
   font-size: 1.75rem;

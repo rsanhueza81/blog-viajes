@@ -2,7 +2,7 @@
 nombre: Costa Sur de Islandia
 fecha: 2023-04-16
 viaje: islandia
-resumen: Desde Reykjavík recorrimos en auto todo el sur, entre cascadas, playas negras, glaciares y lagunas con hielo.
+resumen: Desde Reykjavík recorrimos en auto todo el sur de Islandia, entre cascadas, playas negras, glaciares y lagunas con hielo.
 portada: ./portada.jpg
 portadaAlt: La cascada Seljalandsfoss cayendo desde un acantilado
 portadaLugar: Seljalandsfoss
@@ -56,57 +56,57 @@ fotos:
     pie: Lo que hay arriba de la escalera de Skógafoss.
 ---
 
-Llegamos al sur desde la capital. Desde Reykjavík recorrimos en auto todo el sur, del 16 al 18 de abril de 2023: cascadas, playas negras, glaciares y lagunas con hielo. Fue una súper buena experiencia.
+Desde Reykjavík recorrimos en auto todo el sur de Islandia, del 16 al 18 de abril de 2023: cascadas, playas negras, glaciares y lagunas con hielo. Fue una súper buena experiencia.
 
-Un aviso antes de partir: en Islandia el tiempo puede cambiar de un rato a otro, y los planes también. Hay que ir preparado, con varias capas de ropa, y con café y una muda de ropa a mano.
+Un aviso antes de partir: acá el tiempo cambia de un rato a otro, y los planes también. Hay que andar con varias capas de ropa, y con café y una muda a mano.
 
-La primera parada fue Seljalandsfoss. Desde el estacionamiento, un camino lleva a la cascada, y ahí tienes dos opciones: entrar por detrás de ella o seguir por el camino, donde hay una cascada más chiquitita. Nosotros nos metimos detrás. Unos 150 metros más allá, el camino llega a un riachuelo que sale de una grieta entre paredes de roca negra. Si te metes por la orilla del riachuelo, pisando piedras resbalosas, llegas al rincón secreto: Gljúfrabúi, una cascada de unos 40 metros encerrada entre esas paredes. Conviene ir con zapatos impermeables. Cuando fuimos se pagaba el estacionamiento, que hoy cuesta unos 8 dólares.
+La primera parada fue Seljalandsfoss. Estacionas, caminas un poco y llegas a la cascada. Ahí tienes dos opciones: meterte por detrás o seguir por el camino, donde hay una cascada más chiquitita. Nosotros nos metimos detrás. Si sigues unos 150 metros más, llegas a un riachuelo que sale de entre dos paredes de roca. Te metes por la orilla, pisando piedras, y adentro está el rincón secreto: Gljúfrabúi, una cascada escondida entre esas paredes. Lleva zapatos que se puedan mojar. Nosotros pagamos solo el estacionamiento, que hoy sale unos 8 dólares.
 
-Skógafoss es impresionante. Abajo, al pie de la cascada, te llega el agua y había bastante gente buscando la mejor foto. Al lado sale una escalera de 527 peldaños que cansa mucho, y nosotros nos cansamos un poco.
+Skógafoss es impresionante. Abajo te llega el agua y había bastante gente buscando la mejor foto. Al lado hay una escalera de 527 peldaños. Cansa mucho, y nosotros nos cansamos un poco.
 
-Arriba no se acaba el paseo, porque recién empieza un sendero que sigue el río, con unas 25 cascadas más. Hay varias opciones: caminar un rato y devolverse, llegar hasta un puente a 8 km (unas 4 a 6 horas ida y vuelta) o seguir por el sendero Fimmvörðuháls hasta Þórsmörk, que son unos 25 km y ya es una caminata de uno o más días. Nosotros estuvimos unas dos horas.
+Arriba el paseo sigue: hay un sendero al lado del río, con más cascadas. Puedes caminar un rato y devolverte, que fue lo que hicimos nosotros en unas dos horas, o seguir por horas, e incluso por días, hasta Þórsmörk.
 
-Para llegar al avión de Sólheimasandur hay dos opciones: tomar el transfer, un bus de acercamiento que sale del estacionamiento y se demora unos 15 minutos, o caminar unos 3,5 km por lado (más o menos 45 minutos). Nosotros nos fuimos caminando y nos agarró una especie de tormenta, con lluvia y viento. Llegamos mojados al avión, pero fue una gran experiencia y la parada es recomendable.
+Para llegar al avión de Sólheimasandur hay dos opciones: el transfer, un bus que sale del estacionamiento, o caminar. Son unos 3,5 km por lado, como 45 minutos. Nosotros nos fuimos caminando y nos agarró una especie de tormenta, con lluvia y viento. Llegamos mojados al avión, pero fue una gran experiencia. La parada es recomendable.
 
-Si puedes, toma el transfer. Si caminas, aquí es donde se agradecen el café y la muda de ropa.
+Mi consejo: trata de tomar el transfer. Y si caminas, lleva café y una muda de ropa por si te agarra el agua.
 
 Las playas negras las vimos en dos tandas. Había lluvia, así que no se veía tan claro, pero igual se apreciaba lo lindo que era.
 
-Esa tarde subimos al mirador de Dyrhólaey: había viento, estaba helado y con algo de niebla, pero era hermoso.
+Esa tarde subimos al mirador de Dyrhólaey. Había viento, estaba helado y con algo de niebla, pero era hermoso.
 
-A la mañana siguiente, a primera hora, fuimos a Reynisfjara, con grandes olas y poca gente a esa hora.
+A la mañana siguiente, a primera hora, fuimos a Reynisfjara. Grandes olas y poca gente a esa hora.
 
-Ojo con las olas, que son peligrosas. En Reynisfjara hay olas que llegan sin aviso, mucho más adentro que las demás, y pueden arrastrarte al mar. El agua es helada y no hay salvavidas.
+Ojo con las olas: son peligrosas. De repente llega una mucho más adentro que las demás, sin aviso, y te puede arrastrar.
 
-Hay que quedarse lejos de la orilla y no darle nunca la espalda al mar. También hay que respetar las luces de advertencia: con luz amarilla no se entra a la zona amarilla, y con luz roja no se pasa más allá del letrero.
+No te acerques a la orilla ni le des la espalda al mar, y hazle caso a las luces de advertencia que hay en la playa.
 
-Lo siguiente fueron los glaciares. Subimos al Falljökull con Arctic Adventures, en un tour que se llama Glacier Explorer y que sale de su caseta en Skaftafell. Son varias horas de subida con un especialista.
+Lo siguiente fueron los glaciares. Subimos al Falljökull con Arctic Adventures, en su tour Glacier Explorer, que sale de Skaftafell. Son varias horas de subida con un guía.
 
-Por lo que nos comentaban, no es recomendable subir sin guía, porque los glaciares van cambiando y hay mucho riesgo. Los guías van constantemente, conocen el terreno y te dan la seguridad de que no vas a sufrir un accidente.
+Nos comentaban que no es recomendable subir sin guía, porque el glaciar va cambiando y hay mucho riesgo. Ellos van constantemente y saben por dónde ir.
 
-Lo primero que hacen es revisar los zapatos que llevas. Si no son los adecuados, puedes arrendar un par, y los crampones se arriendan por separado. Un bucecito te lleva hasta el inicio del glaciar.
+Lo primero que hacen es revisar tus zapatos. Si no son los adecuados, arriendas un par, y los crampones se arriendan por separado. Después un bucecito te lleva hasta el inicio del glaciar.
 
-Partes subiendo sin crampones y, cuando aparece el hielo, te enseñan a ponértelos. A medida que el terreno cambia, te van enseñando las técnicas para seguir subiendo. No era tan simple: había que hacer algunas maniobras, dar saltos y estar atento a las condiciones del suelo.
+Partes subiendo sin crampones y, cuando aparece el hielo, te enseñan a ponértelos. No era tan simple: había que hacer algunas maniobras, dar saltos y estar atento al suelo.
 
 Ese mismo día alcanzamos a ir a Svartifoss. Si vas cansado, la caminata no es tan simple, pero tampoco es tan demandante.
 
-El camino era lindo. Es una buena opción para terminar el día.
+El camino era lindo. Buena opción para terminar el día.
 
-Jökulsárlón es muy lindo. Es una laguna joven: se formó hacia 1934, cuando el glaciar Breiðamerkurjökull empezó a retroceder, y no ha parado de crecer.
+Jökulsárlón es muy lindo. Es una laguna al pie de un glaciar, llena de bloques de hielo flotando.
 
-Hoy mide unos 25 km² y es el lago más profundo de Islandia, con hasta 284 metros.
+La laguna no tiene ni cien años: apareció cuando el glaciar empezó a retroceder, y sigue creciendo.
 
-Del frente del glaciar se desprenden bloques de hielo de unos 30 metros de alto, que flotan por la laguna hasta que se achican lo suficiente para salir al mar.
+Los bloques se desprenden del glaciar, flotan hasta el mar y las olas devuelven varios a la playa del frente.
 
-Las olas devuelven muchos de esos bloques a la playa de arena negra del frente, y por eso le dicen Diamond Beach.
+Esa playa es Diamond Beach, de arena negra.
 
-Caminamos hasta ahí desde la laguna, y ver la playa con varios bloques de hielo era muy atractivo.
+Caminamos hasta ahí desde la laguna. Verla con los bloques de hielo era muy atractivo.
 
 Pero creo que lo mejor de todo fue el paseo en zodiac por Fjallsárlón.
 
-Fjallsárlón es una laguna más chica, al pie de otra lengua del mismo glaciar gigante, el Vatnajökull. El paseo lo hicimos con Fjallsárlón Iceberg Boat Tours.
+Es otra laguna, más chica, también al pie de un glaciar. Lo hicimos con Fjallsárlón Iceberg Boat Tours.
 
-Te pasan un traje flotador y un chaleco salvavidas, y el bote navega unos 45 minutos entre los hielos hasta acercarse a la pared del glaciar tanto como es seguro.
+Te pasan un traje y un chaleco salvavidas, y el bote va entre los hielos hasta acercarse a la pared del glaciar. Son unos 45 minutos.
 
 Muy entretenido.
 

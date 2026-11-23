@@ -25,6 +25,9 @@ const Titulo = nivel;
             {rangoViaje(viaje)}, {cuantos(rincones.length)}
           </p>
           {viaje.data.descripcion && <p class="viaje__desc">{viaje.data.descripcion}</p>}
+          <p class="viaje__ver">
+            <a href={urlViaje(viaje)}>Ver los rincones de este viaje →</a>
+          </p>
         </div>
         <a class="tira" href={urlViaje(viaje)} tabindex="-1" aria-hidden="true">
           {[...rincones].reverse().slice(0, 4).map(({ rincon }) => (
@@ -73,6 +76,15 @@ const Titulo = nivel;
     font-size: 1rem;
     line-height: 1.6;
     color: var(--texto-cuerpo);
+  }
+  .viaje__ver {
+    margin: 0.75rem 0 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+  .viaje__ver a {
+    color: var(--acento);
+    text-underline-offset: 4px;
   }
   .tira {
     display: grid;
