@@ -2,7 +2,7 @@
 nombre: Costa Sur de Islandia
 fecha: 2023-04-16
 viaje: islandia
-resumen: Desde Reykjavík recorrimos en auto todo el sur de Islandia, entre cascadas, playas negras, glaciares y lagunas con hielo.
+resumen: Desde Reykjavík recorrimos en auto la costa sur de Islandia, entre cascadas, playas negras, glaciares y lagunas con hielo.
 portada: ./portada.jpg
 portadaAlt: La cascada Seljalandsfoss cayendo desde un acantilado
 portadaLugar: Seljalandsfoss
@@ -56,13 +56,13 @@ fotos:
     pie: Lo que hay arriba de la escalera de Skógafoss.
 ---
 
-Desde Reykjavík recorrimos en auto todo el sur de Islandia, del 16 al 18 de abril de 2023: cascadas, playas negras, glaciares y lagunas con hielo. Fue una súper buena experiencia.
+Desde Reykjavík recorrimos en auto la costa sur de Islandia, del 16 al 18 de abril de 2023: cascadas, playas negras, glaciares y lagunas con hielo. Fue un viaje inolvidable.
 
 Un aviso antes de partir: acá el tiempo cambia de un rato a otro, y los planes también. Hay que andar con varias capas de ropa, y con café y una muda a mano.
 
-La primera parada fue Seljalandsfoss. Estacionas, caminas un poco y llegas a la cascada. Ahí tienes dos opciones: meterte por detrás o seguir por el camino, donde hay una cascada más chiquitita. Nosotros nos metimos detrás. Si sigues unos 150 metros más, llegas a un riachuelo que sale de entre dos paredes de roca. Te metes por la orilla, pisando piedras, y adentro está el rincón secreto: Gljúfrabúi, una cascada escondida entre esas paredes. Lleva zapatos que se puedan mojar. Nosotros pagamos solo el estacionamiento, que hoy sale unos 8 dólares.
+La primera parada fue Seljalandsfoss. Estacionas, caminas un poco y llegas a la cascada. Ahí tienes dos opciones: meterte por detrás o seguir por el camino, donde hay una cascada más pequeña. Nosotros nos metimos detrás. Si sigues unos 150 metros más, llegas a un riachuelo que sale de entre dos paredes de roca. Te metes por la orilla, pisando piedras, y adentro está el rincón secreto: Gljúfrabúi, una cascada escondida entre esas paredes. Lleva zapatos que se puedan mojar. Nosotros pagamos solo el estacionamiento, que hoy sale unos 8 dólares.
 
-Skógafoss es impresionante. Abajo te llega el agua y había bastante gente buscando la mejor foto. Al lado hay una escalera de 527 peldaños. Cansa mucho, y nosotros nos cansamos un poco.
+Skógafoss es impresionante. Abajo te llega el agua y había bastante gente buscando la mejor foto. Al lado hay una escalera de 527 peldaños, que cansa bastante.
 
 Arriba el paseo sigue: hay un sendero al lado del río, con más cascadas. Puedes caminar un rato y devolverte, que fue lo que hicimos nosotros en unas dos horas, o seguir por horas, e incluso por días, hasta Þórsmörk.
 
