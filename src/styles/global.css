@@ -139,6 +139,19 @@ h3 {
     line-height: 1.45;
   }
 }
+/* En pantallas grandes la columna crece junto con la letra: ocupa más pantalla
+   sin alargar las líneas (siguen en unos 72 caracteres, cómodas de leer) */
+@media (min-width: 75rem) {
+  :root {
+    --ancho-texto: 46rem;
+  }
+  .prosa {
+    font-size: 1.375rem;
+  }
+  .prosa--inicio > p:first-child {
+    font-size: 1.9375rem;
+  }
+}
 .prosa > h2 {
   font-family: var(--fuente);
   font-size: 1.75rem;

@@ -16,10 +16,10 @@ const grandes = await Promise.all(
 );
 const alt = (f: Foto, n: number) => f.pie ?? `Foto ${n + 1} de ${nombre}`;
 const tamanos = {
-  ancha: { widths: [800, 1200, 1600], sizes: '(max-width: 64rem) 100vw, 64rem' },
-  lado: { widths: [500, 800, 1100], sizes: '(max-width: 48rem) 100vw, 36rem' },
+  ancha: { widths: [800, 1200, 1600], sizes: '(max-width: 70rem) 100vw, 70rem' },
+  lado: { widths: [500, 800, 1100], sizes: '(max-width: 56rem) 100vw, 26rem' },
   columna: { widths: [500, 800, 1100], sizes: '(max-width: 48rem) 100vw, 40rem' },
-  par: { widths: [500, 800, 1100], sizes: '(max-width: 48rem) 100vw, 32rem' },
+  par: { widths: [500, 800, 1100], sizes: '(max-width: 40rem) 100vw, 35rem' },
 };
 ---
 
@@ -27,8 +27,12 @@ const tamanos = {
   {
     tramos.map((t, i) => (
       <section class:list={['tramo', t.grupo && `tramo--${t.grupo.tipo}`]}>
-        {t.html && <div class:list={['prosa', { 'prosa--inicio': i === 0 }]} set:html={t.html} />}
-        {t.grupo && (
+        {/* La foto al lado va antes en el HTML para que el texto la rodee en computador;
+            en celular el CSS la deja después del texto, como siempre. */}
+        {(t.grupo?.tipo === 'lado' ? ['fotos', 'prosa'] : ['prosa', 'fotos']).map((parte) =>
+          parte === 'prosa'
+            ? t.html && <div class:list={['prosa', { 'prosa--inicio': i === 0 }]} set:html={t.html} />
+            : t.grupo && (
           <div class="fotos">
             {t.grupo.fotos.map(({ foto, n }) => (
               <figure>
@@ -55,6 +59,7 @@ const tamanos = {
               </figure>
             ))}
           </div>
+            )
         )}
       </section>
     ))
@@ -116,6 +121,16 @@ const tamanos = {
 </script>
 
 <style>
+  /* El relato contiene sus fotos al lado (flotantes) para que no se salgan hacia el mapa */
+  .relato {
+    display: flow-root;
+    /* Ancho de las fotos anchas y de a par; la foto al lado llega hasta ese mismo borde */
+    --ancho-relato: 70rem;
+  }
+  /* Columna de lectura centrada: en computador el texto no queda cargado a la izquierda */
+  .prosa {
+    margin-inline: auto;
+  }
   .tramo + .tramo {
     margin-top: 4rem;
   }
@@ -173,10 +188,18 @@ const tamanos = {
     font-style: normal;
   }
 
+  /* Las fotos que no van al lado parten debajo de cualquier foto al lado y van centradas */
+  .tramo--ancha .fotos,
+  .tramo--columna .fotos,
+  .tramo--par .fotos {
+    clear: both;
+    margin-inline: auto;
+  }
+
   /* Foto ancha: más que el texto, sin llegar a los bordes */
   .tramo--ancha .fotos {
     margin-top: 3.5rem;
-    max-width: 64rem;
+    max-width: var(--ancho-relato);
   }
   .tramo--ancha img {
     max-height: 80vh;
@@ -192,7 +215,7 @@ const tamanos = {
   /* Dos fotos lado a lado */
   .tramo--par .fotos {
     margin-top: 3.5rem;
-    max-width: 64rem;
+    max-width: var(--ancho-relato);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
@@ -203,15 +226,13 @@ const tamanos = {
     object-fit: cover;
   }
 
-  /* Foto al lado del texto */
-  .tramo--lado {
-    display: grid;
-    grid-template-columns: minmax(0, var(--ancho-texto)) minmax(0, 32rem);
-    gap: 4rem;
-    align-items: start;
-  }
+  /* Foto al lado del texto: flota a la derecha de la columna, sobresaliendo hacia el margen,
+     y el texto la rodea y sigue debajo. Así no quedan huecos cuando hay poco texto. */
   .tramo--lado .fotos {
-    padding-top: 0.5rem;
+    float: right;
+    clear: right;
+    width: min(26rem, 42%);
+    margin: 0.5rem max(0px, calc((100% - var(--ancho-relato)) / 2)) 2rem 2.5rem;
   }
   .tramo--lado img {
     max-height: 85vh;
@@ -220,12 +241,14 @@ const tamanos = {
 
   @media (max-width: 56rem) {
     .tramo--lado {
-      grid-template-columns: 1fr;
-      gap: 0;
+      display: flex;
+      flex-direction: column;
     }
     .tramo--lado .fotos {
-      margin-top: 3rem;
-      padding-top: 0;
+      order: 2;
+      float: none;
+      width: auto;
+      margin: 3rem 0 0;
     }
   }
   @media (max-width: 40rem) {
